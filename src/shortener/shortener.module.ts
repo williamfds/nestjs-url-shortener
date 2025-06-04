@@ -3,12 +3,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ShortenerService } from './shortener.service';
 import { ShortenerController } from './shortener.controller';
 import { Link } from './entities/link.entity';
-
+import { RedisProviderModule } from '../redis/redis.module';
 @Module({
   imports: [
     TypeOrmModule.forFeature([Link]),
+    RedisProviderModule,
   ],
-  providers: [ShortenerService],
   controllers: [ShortenerController],
+  providers: [ShortenerService],
 })
 export class ShortenerModule {}
