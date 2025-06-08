@@ -1,5 +1,14 @@
 # NestJS URL Shortener
 
+# NestJS URL Shortener
+
+![Node](https://img.shields.io/badge/node-18.x-green)
+![NestJS](https://img.shields.io/badge/nestjs-%F0%9F%94%A5-red)
+![TypeScript](https://img.shields.io/badge/typescript-5.x-blue)
+![Docker](https://img.shields.io/badge/docker-ready-blue)
+![Swagger](https://img.shields.io/badge/swagger-api-green)
+![License](https://img.shields.io/github/license/williamfds/nestjs-url-shortener)
+
 A simple and fast URL shortener built with NestJS, PostgreSQL, Redis and TypeORM.  
 Um encurtador de URLs simples e rápido, construído com NestJS, PostgreSQL, Redis e TypeORM.
 
