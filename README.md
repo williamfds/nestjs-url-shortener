@@ -1,98 +1,125 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# NestJS URL Shortener
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A simple and fast URL shortener built with NestJS, PostgreSQL, Redis and TypeORM.  
+Um encurtador de URLs simples e rápido, construído com NestJS, PostgreSQL, Redis e TypeORM.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## Features | Funcionalidades
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Generate short links from long URLs / Gerar links curtos de URLs longas
+- Track redirect statistics / Acompanhar estatísticas de redirecionamento
+- Custom slugs support / Suporte a slugs personalizados
+- Bilingual API documentation (EN/PT) / Documentação bilíngue da API (EN/PT)
+- Rate-limiting via Throttler / Limitação de requisições
 
-## Project setup
+---
+
+## Installation | Instalação
 
 ```bash
-$ npm install
+# 1. Clone the repository / Clone o repositório
+git clone https://github.com/williamfds/nestjs-url-shortener.git
+cd nestjs-url-shortener
+
+# 2. Install dependencies / Instale as dependências
+npm install
 ```
 
-## Compile and run the project
+---
+
+## Running with Docker | Executando com Docker
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+# Start all services / Subir todos os serviços
+docker-compose up --build
 ```
 
-## Run tests
+> You will have PostgreSQL, Redis and the API running on http://localhost:3000  
+> Você terá PostgreSQL, Redis e a API rodando em http://localhost:3000
+
+---
+
+## Environment Variables | Variáveis de Ambiente
+
+Crie os arquivos `.env.development` e `.env.test` com base no `.env.example`.
+
+### .env.example
+
+```env
+# PostgreSQL
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USER=postgres
+DATABASE_PASS=123
+DATABASE_NAME=shortener
+
+# Redis
+REDIS_HOST=localhost
+REDIS_PORT=6379
+
+# App
+PORT=3000
+```
+
+- `.env.development`: usado no desenvolvimento local.
+- `.env.test`: usado durante a execução dos testes e2e.
+
+---
+
+## Testing | Testes
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# Run unit and integration tests / Rodar testes unitários e de integração
+docker exec -it nestjs-url-shortener-app npm run test:e2e
 ```
 
-## Deployment
+> Make sure the test database exists:  
+> Certifique-se de que o banco `shortener_test` exista.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+---
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## Swagger Documentation
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+- 🇺🇸 English: [http://localhost:3000/api](http://localhost:3000/api)
+- 🇧🇷 Português: [http://localhost:3000/api-pt](http://localhost:3000/api-pt)
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Explore the endpoints and try out the API directly from the browser.  
+Explore os endpoints e teste a API diretamente pelo navegador.
 
-## Resources
+---
 
-Check out a few resources that may come in handy when working with NestJS:
+## API Overview | Visão geral da API
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+| Method | Endpoint              | Description                              |
+|--------|-----------------------|------------------------------------------|
+| POST   | `/shorten`            | Create a new short URL                   |
+| GET    | `/:slug`              | Redirect to the original URL             |
+| GET    | `/stats/:slug`        | Get stats for a short URL                |
+| PATCH  | `/slug/:slug`         | Update the slug of a short URL           |
+| DELETE | `/slug/:slug`         | Delete a short URL                       |
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Technologies Used | Tecnologias Utilizadas
 
-## Stay in touch
+- **NestJS** – Framework backend
+- **TypeORM** – ORM com suporte a PostgreSQL
+- **PostgreSQL** – Banco relacional
+- **Redis** – Armazenamento de cache
+- **Swagger** – Documentação da API
+- **Docker** – Containerização da aplicação
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
+## 🧑‍💻 Author | Autor
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+William Ferreira da Silva  
+[github.com/williamfds](https://github.com/williamfds)
+
+---
+
+## License | Licença
+
+This project is licensed under the MIT License.  
+Este projeto está licenciado sob a licença MIT.

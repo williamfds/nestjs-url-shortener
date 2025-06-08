@@ -1,7 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { SwaggerModule } from '@nestjs/swagger';
+import { swaggerConfigEN, swaggerConfigPT } from './swagger/swagger.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -10,22 +11,17 @@ async function bootstrap() {
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
   );
 
-  const config = new DocumentBuilder()
-    .setTitle('URL Shortener API')
-    .setDescription('A simple URL shortener using NestJS, PostgreSQL and Redis')
-    .setVersion('1.0')
-    .build();
+  const documentEN = SwaggerModule.createDocument(app, swaggerConfigEN);
+  SwaggerModule.setup('api', app, documentEN);
 
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  const documentPT = SwaggerModule.createDocument(app, swaggerConfigPT);
+  SwaggerModule.setup('api-pt', app, documentPT);
 
   const port = process.env.PORT || 3000;
   await app.listen(port);
-  console.log('ENV CHECK:', process.env.DATABASE_PASS);
 
-
-  console.log(`Application listening on http://localhost:${port}`);
-  console.log(`Swagger docs available at http://localhost:${port}/api`);
-
+  console.log(`✅ App on http://localhost:${port}`);
+  console.log(`🇺🇸 Swagger EN: http://localhost:${port}/api`);
+  console.log(`🇧🇷 Swagger PT: http://localhost:${port}/api-pt`);
 }
 bootstrap();
